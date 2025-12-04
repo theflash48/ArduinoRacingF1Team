@@ -44,5 +44,9 @@ void loop() {
     Serial.print(dato.volante);
     Serial.print(",");
     Serial.println(dato.acelerador);
+  }else{
+    Serial.print(0);
+    Serial.print(",");
+    Serial.println(0);
   }
 }

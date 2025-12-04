@@ -17,6 +17,8 @@ typedef struct __attribute__((packed)) {
 volatile ControlData ultimo;
 volatile bool nuevoDato = false;
 
+const uint8_t pinMotor = 25;
+
 // Callback de recepción (MANDO -> COCHE)
 void onDataRecv(const esp_now_recv_info *info, const uint8_t *incomingData, int len) {
   if (len == sizeof(ControlData)) {
@@ -28,6 +30,8 @@ void onDataRecv(const esp_now_recv_info *info, const uint8_t *incomingData, int 
 void setup() {
   Serial.begin(115200);
   Serial.println("Coche ESP32 arrancando...");
+
+  pinMode(pinMotor, OUTPUT);
 
   WiFi.mode(WIFI_STA);
 
@@ -62,6 +66,8 @@ void loop() {
     Serial.print(dato.volante);
     Serial.print("  Acelerador: ");
     Serial.println(dato.acelerador);
+
+    analogWrite(pinMotor, dato.acelerador);
 
     // Aquí luego metes el control de motor / dirección
 
