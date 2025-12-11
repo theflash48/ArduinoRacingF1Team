@@ -61,22 +61,23 @@ void loop() {
     // *** LIGERO CAMBIO: copiar a variable local para trabajar tranquilos ***
     ControlData dato;
     memcpy(&dato, (const void*)&ultimo, sizeof(ControlData));
-
+    /*
     Serial.print("RECIBIDO -> Volante: ");
     Serial.print(dato.volante);
     Serial.print("  Acelerador: ");
     Serial.println(dato.acelerador);
-
+    */
     analogWrite(pinMotor, dato.acelerador);
 
     // Aquí luego metes el control de motor / dirección
 
     // *** NUEVO *** Reenviar ese mismo dato a la BASE
     esp_err_t result = esp_now_send(macBase, (uint8_t *)&dato, sizeof(dato));
-
+    /*
     // Log opcional (si ves que spamea demasiado se puede comentar)
     if (result != ESP_OK) {
       Serial.println("Error enviando datos a BASE");
     }
+    */
   }
 }
