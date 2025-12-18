@@ -1026,6 +1026,9 @@ MonoBehaviour:
   accelMaxRaw: 255
   wheelMinRaw: 0
   wheelMaxRaw: 255
+  throttleSmoothingEnabled: 1
+  throttleRiseResponse: 4
+  throttleFallResponse: 12
   rearWheelDrive: 1
   finalDrive: 3.4
   drivetrainEfficiency: 0.92
@@ -1041,11 +1044,25 @@ MonoBehaviour:
   - 0.84
   lockReverseWhileMoving: 1
   revolutionsMax: 12000
+  idleRpm: 4500
   maxEngineTorque: 18000
-  rpmSmoothing: 12
+  coupledRpmResponse: 14
+  neutralRpmResponse: 22
   torqueBase: 0.35
   torqueFallStart: 0.88
   torqueFallEnd: 1
+  limiterEnabled: 1
+  limiterBandRpm: 300
+  limiterHoldEnabled: 1
+  limiterHoldToleranceKmh: 1
+  limiterHoldBrakePerMs: 1200
+  limiterHoldMaxBrakeTorque: 8000
+  launchControlEnabled: 1
+  launchMaxSpeedKmh: 120
+  launchSlipStart: 0.12
+  launchSlipFull: 0.35
+  launchMinTorqueScale: 0.25
+  launchResponse: 25
   maxBrakeTorque: 3500
   absEnabled: 1
   absSlipStart: 0.2
@@ -1095,6 +1112,7 @@ MonoBehaviour:
   car: {fileID: 0}
   speedText: {fileID: 0}
   gearText: {fileID: 0}
+  rpmText: {fileID: 0}
 --- !u!1 &5283457407332158176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,8 +1429,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6974291094238845148}
-  - component: {fileID: 6490663765230119864}
-  - component: {fileID: 2209062748730331628}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1438,88 +1454,6 @@ Transform:
   - {fileID: 6406569530086071840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6490663765230119864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977729977203464268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f43e3decfe7e54890cb4390c0b51ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarController
-  serial: {fileID: 0}
-  wcFL: {fileID: 0}
-  wcFR: {fileID: 0}
-  wcRL: {fileID: 0}
-  wcRR: {fileID: 0}
-  visFL: {fileID: 0}
-  visFR: {fileID: 0}
-  visRL: {fileID: 0}
-  visRR: {fileID: 0}
-  maxSteerAngle: 22
-  invertSteer: 0
-  brakeMaxRaw: 95
-  accelMinRaw: 105
-  accelMaxRaw: 255
-  wheelMinRaw: 0
-  wheelMaxRaw: 255
-  rearWheelDrive: 1
-  finalDrive: 3.4
-  drivetrainEfficiency: 0.92
-  reverseRatio: 3.2
-  forwardRatios:
-  - 3.1
-  - 2.2
-  - 1.7
-  - 1.4
-  - 1.2
-  - 1.05
-  - 0.92
-  - 0.84
-  lockReverseWhileMoving: 1
-  revolutionsMax: 12000
-  maxEngineTorque: 520
-  rpmSmoothing: 12
-  torqueBase: 0.35
-  torqueFallStart: 0.88
-  torqueFallEnd: 1
-  maxBrakeTorque: 3500
-  absEnabled: 1
-  absSlipStart: 0.2
-  absSlipFull: 0.55
-  absMinBrakeScale: 0.2
-  absReleaseRate: 25
-  absApplyRate: 10
-  tractionControlEnabled: 1
-  tcSlipStart: 0.2
-  tcSlipFull: 0.6
-  tcMinTorqueScale: 0.25
-  centerOfMassOffset: {x: 0, y: -0.35, z: 0}
---- !u!114 &2209062748730331628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977729977203464268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39495c306268dec40bff4d4366fffbf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SerialManager
-  portName: COM3
-  baudRate: 115200
-  wheelValue: 0
-  throttleValue: 0
-  gearValue: 0
-  revolutions: 8000
-  revolutionsMax: 12000
-  sendInterval: 0.05
-  logRx: 0
-  logTx: 0
 --- !u!1 &8147471525865152405
 GameObject:
   m_ObjectHideFlags: 0
